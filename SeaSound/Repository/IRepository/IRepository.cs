@@ -1,5 +1,6 @@
 ﻿using SeaSound.Data;
 using SeaSound.Repository;
+using SeaSound.Repository.Model;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace TestApi.Repositories
     {       
         #region GET
         public Task<List<T>> GetAllObjectAsync(int pageNumber = -1, int pageSize = -1);
-        public Task<List<T>> SearchObjectAsync(Expression<Func<Song, bool>> predicate = null, int pageNumber = -1, int pageSize = -1);
+        public Task<List<T>> SearchObjectAsync(Expression<Func<T, bool>> predicate = null, int pageNumber = -1, int pageSize = -1);
         public Task<T?> GetObjectAsync(params object[] id);
         #endregion GET
 

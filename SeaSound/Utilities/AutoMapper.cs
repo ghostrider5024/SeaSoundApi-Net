@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SeaSound.Repository;
+using SeaSound.Repository.Model;
 using SeaSound.Service.Model;
 
 namespace SeaSound.Utilities
@@ -9,6 +10,7 @@ namespace SeaSound.Utilities
         public AutoMapper()
         {
             MapSong();
+            MapAlbum();
             //MapArtist();
             //MapSongArtist();
         }
@@ -20,6 +22,11 @@ namespace SeaSound.Utilities
              //.ForMember(dest => dest.Playlists, opt => opt.MapFrom(src => src.SongPlaylists.Select(sc => sc.PlaylistId)))
              .ReverseMap();
 
+        }  
+        
+        private void MapAlbum()
+        {
+            CreateMap<Album, AlbumResponse>().ReverseMap();
         }
 
         //private void MapArtist()

@@ -8,7 +8,7 @@ namespace SeaSound.Service.IService
     {
         #region GET
         public Task<List<T>> GetAllObjectAsync(int pageNumber = -1, int pageSize = -1);
-        public Task<List<T>> SearchObjectAsync(Expression<Func<Song, bool>> predicate = null, int pageNumber = -1, int pageSize = -1);
+        public Task<List<T>> SearchObjectAsync(Expression<Func<T, bool>> predicate = null, int pageNumber = -1, int pageSize = -1);
         public Task<T?> GetObjectAsync(params object[] id);
         #endregion GET
 

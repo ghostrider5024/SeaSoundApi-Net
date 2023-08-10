@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
-using SeaSound.Repository;
 using SeaSound.Repository.IRepository;
+using SeaSound.Repository.Model;
+using SeaSound.Service.IService;
 using System.Linq.Expressions;
 
-namespace SeaSound.Service.IService
+namespace SeaSound.Service
 {
     public class SongService : ISongService
     {

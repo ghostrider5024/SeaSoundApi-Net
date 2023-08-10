@@ -1,6 +1,7 @@
 using SeaSound.Data;
 using SeaSound.Repository;
 using SeaSound.Repository.IRepository;
+using SeaSound.Service;
 using SeaSound.Service.IService;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,6 +40,11 @@ void AddDI(IServiceCollection services)
     #region Song
     services.AddScoped<ISongRepository, SongRepository>();
     services.AddScoped<ISongService, SongService>();
+    #endregion
+
+    #region Album
+    services.AddScoped<IAlbumRepository, AlbumRepository>();
+    services.AddScoped<IAlbumService, AlbumService>();
     #endregion
 
     //#region Artist

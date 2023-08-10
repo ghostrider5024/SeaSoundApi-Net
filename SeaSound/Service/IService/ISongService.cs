@@ -1,4 +1,5 @@
 ﻿using SeaSound.Repository;
+using SeaSound.Repository.Model;
 
 namespace SeaSound.Service.IService
 {

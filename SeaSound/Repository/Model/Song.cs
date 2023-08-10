@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SeaSound.Repository
+namespace SeaSound.Repository.Model
 {
     [Table("Song")]
     public class Song : BaseModel
@@ -15,5 +15,10 @@ namespace SeaSound.Repository
         [MaxLength(200)]
         public string? Tag { get; set; }
         public DateTimeOffset ReleaseDate { get; set; }
+
+        public ICollection<SongArtist> SongArtists { get; set; }
+        public ICollection<SongPlaylist> SongPlaylists { get; set; }
+        public ICollection<SongAlbum> SongAlbums { get; set; }
+
     }
 }
