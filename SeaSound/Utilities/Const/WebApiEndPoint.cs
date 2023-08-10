@@ -23,5 +23,15 @@
             public const string UpdateAlbum = BaseEndpoint + "/update";
             public const string DeleteAlbum = BaseEndpoint + "/delete";
         }
+
+        public static class SongAlbum
+        {
+            private const string BaseEndpoint = "~/" + AreaName + "/SongAlbum";
+            public const string GetAllSongAlbums = BaseEndpoint + "/get-all";
+            public const string SearchSongAlbums = BaseEndpoint + "/search";
+            public const string CreateSongAlbum = BaseEndpoint + "/create";
+            public const string UpdateSongAlbum = BaseEndpoint + "/update";
+            public const string DeleteSongAlbum = BaseEndpoint + "/delete";
+        }
     }
 }

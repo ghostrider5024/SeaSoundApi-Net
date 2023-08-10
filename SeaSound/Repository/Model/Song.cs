@@ -8,7 +8,7 @@ namespace SeaSound.Repository.Model
     public class Song : BaseModel
     {
         public string Title { get; set; }
-        public string? ArtistNames   { get; set; }
+        public string? ArtistNames { get; set; }
         public string? Image { get; set; }
         public string AudioUrl { get; set; }
 

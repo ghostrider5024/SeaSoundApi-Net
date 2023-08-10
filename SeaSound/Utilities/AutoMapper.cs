@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
-using SeaSound.Repository;
 using SeaSound.Repository.Model;
-using SeaSound.Service.Model;
+using SeaSound.Service.Model.Album;
+using SeaSound.Service.Model.Song;
+using SeaSound.Service.Model.SongAlbum;
 
 namespace SeaSound.Utilities
 {
@@ -11,6 +12,7 @@ namespace SeaSound.Utilities
         {
             MapSong();
             MapAlbum();
+            MapSongAlbum();
             //MapArtist();
             //MapSongArtist();
         }
@@ -27,6 +29,10 @@ namespace SeaSound.Utilities
         private void MapAlbum()
         {
             CreateMap<Album, AlbumResponse>().ReverseMap();
+        }
+        private void MapSongAlbum()
+        {
+            CreateMap<SongAlbum, SongAlbumResponse>().ReverseMap();
         }
 
         //private void MapArtist()

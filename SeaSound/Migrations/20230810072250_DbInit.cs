@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SeaSound.Migrations
 {
-    public partial class DbInit3 : Migration
+    public partial class DbInit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,7 +18,7 @@ namespace SeaSound.Migrations
                     ArtistNames = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ReleaseDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     TotalListen = table.Column<int>(type: "int", nullable: false),
                     HomeRowIndex = table.Column<int>(type: "int", nullable: true),
                     HomeColumnIndex = table.Column<int>(type: "int", nullable: true),
@@ -28,6 +28,37 @@ namespace SeaSound.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Album", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Region",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    RegionName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    DeleteDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Region", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Song",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ArtistNames = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AudioUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Tag = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    ReleaseDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    DeleteDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Song", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -44,6 +75,30 @@ namespace SeaSound.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_User", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Artist",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    DebutDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    RegionId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    DeleteDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Artist", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Artist_Region_RegionId",
+                        column: x => x.RegionId,
+                        principalTable: "Region",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -95,6 +150,32 @@ namespace SeaSound.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SongArtist",
+                columns: table => new
+                {
+                    SongId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ArtistId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DeleteDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SongArtist", x => new { x.SongId, x.ArtistId });
+                    table.ForeignKey(
+                        name: "FK_SongArtist_Artist_ArtistId",
+                        column: x => x.ArtistId,
+                        principalTable: "Artist",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SongArtist_Song_SongId",
+                        column: x => x.SongId,
+                        principalTable: "Song",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SongPlaylists",
                 columns: table => new
                 {
@@ -121,6 +202,11 @@ namespace SeaSound.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Artist_RegionId",
+                table: "Artist",
+                column: "RegionId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Playlist_UserId",
                 table: "Playlist",
                 column: "UserId");
@@ -129,6 +215,11 @@ namespace SeaSound.Migrations
                 name: "IX_SongAlbum_AlbumId",
                 table: "SongAlbum",
                 column: "AlbumId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SongArtist_ArtistId",
+                table: "SongArtist",
+                column: "ArtistId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SongPlaylists_PlaylistId",
@@ -142,13 +233,25 @@ namespace SeaSound.Migrations
                 name: "SongAlbum");
 
             migrationBuilder.DropTable(
+                name: "SongArtist");
+
+            migrationBuilder.DropTable(
                 name: "SongPlaylists");
 
             migrationBuilder.DropTable(
                 name: "Album");
 
             migrationBuilder.DropTable(
+                name: "Artist");
+
+            migrationBuilder.DropTable(
                 name: "Playlist");
+
+            migrationBuilder.DropTable(
+                name: "Song");
+
+            migrationBuilder.DropTable(
+                name: "Region");
 
             migrationBuilder.DropTable(
                 name: "User");

@@ -2,7 +2,7 @@
 
 namespace SeaSound.Repository.IRepository
 {
-    public interface IAlbumRepository : IRepository<Album>
+    public interface ISongAlbumRepository : IRepository<SongAlbum>
     {
     }
 }

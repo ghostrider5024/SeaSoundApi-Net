@@ -1,4 +1,4 @@
-﻿namespace SeaSound.Service.Model
+﻿namespace SeaSound.Service.Model.Playlist
 {
     public class PlaylistResponse
     {

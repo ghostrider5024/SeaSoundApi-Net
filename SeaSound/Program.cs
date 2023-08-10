@@ -47,6 +47,11 @@ void AddDI(IServiceCollection services)
     services.AddScoped<IAlbumService, AlbumService>();
     #endregion
 
+    #region SongAlbum
+    services.AddScoped<ISongAlbumRepository, SongAlbumRepository>();
+    services.AddScoped<ISongAlbumService, SongAlbumService>();
+    #endregion
+
     //#region Artist
     //services.AddScoped<ArtistRepository>();
     //services.AddScoped<IArtistService, ArtistService>();

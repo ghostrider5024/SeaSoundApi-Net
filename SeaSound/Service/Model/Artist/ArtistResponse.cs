@@ -1,6 +1,7 @@
 ﻿using SeaSound.Repository.Model;
+using SeaSound.Service.Model.Region;
 
-namespace SeaSound.Service.Model
+namespace SeaSound.Service.Model.Artist
 {
     public class ArtistResponse
     {
@@ -10,7 +11,7 @@ namespace SeaSound.Service.Model
         public string? Image { get; set; }
         public string Gender { get; set; }
         public string RegionId { get; set; }
-        public Region Region { get; set; }
+        public RegionResponse Region { get; set; }
 
     }
 }

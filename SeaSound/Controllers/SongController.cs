@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SeaSound.Repository.Model;
 using SeaSound.Service.IService;
-using SeaSound.Service.Model;
+using SeaSound.Service.Model.Song;
 using SeaSound.Utilities;
 using SeaSound.Utilities.Const;
 

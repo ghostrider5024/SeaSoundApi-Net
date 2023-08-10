@@ -12,8 +12,8 @@ using SeaSound.Data;
 namespace SeaSound.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230810053524_DbInit3")]
-    partial class DbInit3
+    [Migration("20230810072250_DbInit")]
+    partial class DbInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -52,8 +52,8 @@ namespace SeaSound.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("ReleaseDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset?>("ReleaseDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Title")
                         .IsRequired()

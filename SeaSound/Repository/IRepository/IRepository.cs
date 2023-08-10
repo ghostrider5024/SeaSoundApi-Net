@@ -1,10 +1,6 @@
-﻿using SeaSound.Data;
-using SeaSound.Repository;
-using SeaSound.Repository.Model;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 
-namespace TestApi.Repositories
+namespace SeaSound.Repository.IRepository
 {
     public interface IRepository<T> where T : class
     {       

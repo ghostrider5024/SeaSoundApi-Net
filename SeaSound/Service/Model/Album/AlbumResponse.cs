@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace SeaSound.Service.Model
+﻿namespace SeaSound.Service.Model.Album
 {
     public class AlbumResponse
     {
